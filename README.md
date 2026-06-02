@@ -115,6 +115,6 @@ Custom fonts from Google Fonts:
 ## Contact
 
 - **Email**: info@hawisartorial.co.ke
-- **Phone**: +254 700 000 000
-- **WhatsApp**: +254 700 000 000
+- **Phone**: +254 717 983 802
+- **WhatsApp**: +254 717 983 802
 - **Location**: Nairobi, Kenya
