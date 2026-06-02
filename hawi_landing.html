@@ -133,20 +133,23 @@
   .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 
   /* GALLERY */
-  .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem}
-  .gallery-item{position:relative;overflow:hidden;border-radius:8px;border:none;background:none;cursor:pointer;transition:all 0.3s}
-  .gallery-item img{width:100%;height:300px;object-fit:cover;transition:transform 0.3s}
-  .gallery-item span{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);color:var(--text);padding:1.5rem 1rem;font-weight:600;transform:translateY(20px);transition:transform 0.3s;font-size:1rem}
-  .gallery-item:hover img{transform:scale(1.1)}
-  .gallery-item:hover span{transform:translateY(0)}
+  .gallery-section{background:var(--dark);padding:6rem 0}
+  .gallery-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+  .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem;margin-top:3rem}
+  .gallery-item{position:relative;overflow:hidden;border-radius:12px;border:2px solid rgba(184,150,12,0.3);background:none;cursor:pointer;transition:all 0.3s;aspect-ratio:1;display:block;padding:0;height:100%;min-height:350px}
+  .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;display:block}
+  .gallery-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8),rgba(0,0,0,0.3));display:flex;align-items:flex-end;padding:2rem;opacity:1;transition:opacity 0.3s}
+  .gallery-item-title{color:var(--text);font-weight:600;font-size:1.3rem;font-family:var(--serif);margin:0;transform:translateY(0);transition:transform 0.3s}
+  .gallery-item:hover img{transform:scale(1.08)}
+  .gallery-item:hover .gallery-item-overlay{background:linear-gradient(to top,rgba(184,150,12,0.6),rgba(184,150,12,0.2))}
 
   .lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.95);z-index:1001;justify-content:center;align-items:center;padding:2rem}
   .lightbox.active{display:flex}
-  .lightbox-close{position:absolute;top:20px;right:30px;font-size:3rem;background:none;border:none;color:var(--text);cursor:pointer;transition:color 0.3s}
+  .lightbox-close{position:absolute;top:20px;right:30px;font-size:3rem;background:none;border:none;color:var(--text);cursor:pointer;transition:color 0.3s;z-index:1002}
   .lightbox-close:hover{color:var(--gold-light)}
   .lightbox-content{position:relative;max-width:90%;max-height:80vh;text-align:center}
-  .lightbox-content img{width:100%;max-height:70vh;object-fit:contain}
-  .lightbox-content p{color:var(--text);margin-top:1.5rem;font-size:1.2rem}
+  .lightbox-content img{width:100%;max-height:70vh;object-fit:contain;border-radius:8px;box-shadow:0 0 40px rgba(212,175,55,0.3)}
+  .lightbox-content p{color:var(--gold-light);margin-top:1.5rem;font-size:1.2rem;font-weight:600}
 
   /* FOOTER */
   footer{background:var(--dark-2);border-top:0.5px solid rgba(184,150,12,0.2);padding:3rem 4rem;display:flex;align-items:center;justify-content:space-between}
@@ -169,7 +172,40 @@
   .form-message.success{background:rgba(76,175,80,0.15);color:#4caf50;border:0.5px solid rgba(76,175,80,0.4)}
   .form-message.error{background:rgba(244,67,54,0.15);color:#f44336;border:0.5px solid rgba(244,67,54,0.4)}
 
-  @media(max-width:768px){\n    nav{padding:1rem 1.5rem}\n    .nav-toggle{display:flex}\n    .nav-links{position:absolute;top:100%;left:0;right:0;background:var(--dark-2);flex-direction:column;gap:0;max-height:0;overflow:hidden;transition:max-height 0.3s;border-bottom:1px solid rgba(184,150,12,0.2)}\n    .nav-links.active{max-height:500px}\n    .nav-links a{padding:1rem 1.5rem;border-bottom:1px solid rgba(184,150,12,0.1)}\n    .stats{grid-template-columns:repeat(2,1fr);padding:2rem 1.5rem}\n    .section,.services-inner,.process-inner,.contact-inner{padding:4rem 1.5rem}\n    .about-grid,.contact-grid,.why-grid{grid-template-columns:1fr;gap:2rem}\n    .services-grid,.testimonials-grid{grid-template-columns:1fr}\n    .gallery-grid{grid-template-columns:1fr}\n    .process-steps{grid-template-columns:repeat(2,1fr);gap:2rem}\n    .process-steps::before{display:none}\n    footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem}\n    .footer-links{justify-content:center}\n    .form-row{grid-template-columns:1fr}\n    .back-to-top,.whatsapp-float{bottom:20px;right:20px;width:45px;height:45px}\n    .whatsapp-float{bottom:80px}\n    .hero{margin-top:60px}\n  }\n\n  @media(max-width:480px){\n    nav{padding:0.8rem 1rem}\n    .nav-logo{font-size:1.1rem}\n    .nav-cta{padding:0.4rem 1rem;font-size:0.7rem}\n    .hero h1{font-size:2rem}\n    .hero p{font-size:0.95rem}\n    .section-title{font-size:1.5rem}\n    .stat-num{font-size:2rem}\n    .services-grid{grid-template-columns:1fr}\n    .section,.services-inner,.process-inner,.contact-inner{padding:2rem 1rem}\n    .about-grid{gap:2rem}\n  }\n</style>
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem}
+    .nav-toggle{display:flex}
+    .nav-links{position:absolute;top:100%;left:0;right:0;background:var(--dark-2);flex-direction:column;gap:0;max-height:0;overflow:hidden;transition:max-height 0.3s;border-bottom:1px solid rgba(184,150,12,0.2)}
+    .nav-links.active{max-height:500px}
+    .nav-links a{padding:1rem 1.5rem;border-bottom:1px solid rgba(184,150,12,0.1)}
+    .stats{grid-template-columns:repeat(2,1fr);padding:2rem 1.5rem}
+    .section,.services-inner,.process-inner,.contact-inner,.gallery-inner{padding:4rem 1.5rem}
+    .about-grid,.contact-grid,.why-grid{grid-template-columns:1fr;gap:2rem}
+    .services-grid,.testimonials-grid{grid-template-columns:1fr}
+    .gallery-grid{grid-template-columns:1fr}
+    .process-steps{grid-template-columns:repeat(2,1fr);gap:2rem}
+    .process-steps::before{display:none}
+    footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem}
+    .footer-links{justify-content:center}
+    .form-row{grid-template-columns:1fr}
+    .back-to-top,.whatsapp-float{bottom:20px;right:20px;width:45px;height:45px}
+    .whatsapp-float{bottom:80px}
+    .hero{margin-top:60px}
+  }
+
+  @media(max-width:480px){
+    nav{padding:0.8rem 1rem}
+    .nav-logo{font-size:1.1rem}
+    .nav-cta{padding:0.4rem 1rem;font-size:0.7rem}
+    .hero h1{font-size:2rem}
+    .hero p{font-size:0.95rem}
+    .section-title{font-size:1.5rem}
+    .stat-num{font-size:2rem}
+    .services-grid{grid-template-columns:1fr}
+    .section,.services-inner,.process-inner,.contact-inner,.gallery-inner{padding:2rem 1rem}
+    .about-grid{gap:2rem}
+  }
+</style>
 </head>
 <body>
 
@@ -334,34 +370,105 @@
   </div>
 </section>
 
-<!-- PORTFOLIO -->
-<section id="portfolio" style="background:var(--dark)">
-  <div class="section">
+<!-- PORTFOLIO GALLERY -->
+<section id="portfolio" class="gallery-section">
+  <div class="gallery-inner">
     <div class="section-tag">Gallery</div>
-    <h2 class="section-title">Our Portfolio</h2>
+    <h2 class="section-title">Our Premium Collections</h2>
     <div class="gallery-grid">
-      <button class="gallery-item" data-title="Gold Luxury Wear" data-src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlbaWmJmaoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==">
-        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlbaWmJmaoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==" alt="Gold Luxury Wear"/>
-        <span>Gold Luxury Wear</span>
+      <!-- Gold Luxury Wear -->
+      <button class="gallery-item" data-title="Gold Luxury Wear" onclick="openLightbox(this)">
+        <svg style="width:100%;height:100%;position:absolute;top:0;left:0" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#D4AF37;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <rect width="400" height="400" fill="#1a1a1a"/>
+          <rect x="50" y="80" width="300" height="280" fill="url(#goldGradient)" rx="15"/>
+          <circle cx="200" cy="150" r="60" fill="#FFE5B4" opacity="0.3"/>
+          <polygon points="200,220 240,280 160,280" fill="#2d2d2d" opacity="0.2"/>
+          <text x="200" y="360" font-family="Georgia, serif" font-size="24" fill="#D4AF37" text-anchor="middle" font-weight="bold">GOLD LUXURY</text>
+        </svg>
+        <div class="gallery-item-overlay">
+          <h3 class="gallery-item-title">Gold Luxury Wear</h3>
+        </div>
       </button>
-      <button class="gallery-item" data-title="Black Fashion Design" data-src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlbaWmJmaoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==">
-        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlbaWmJmaoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==" alt="Black Fashion Design"/>
-        <span>Black Fashion Design</span>
+
+      <!-- Black Fashion Design -->
+      <button class="gallery-item" data-title="Black Fashion Design" onclick="openLightbox(this)">
+        <svg style="width:100%;height:100%;position:absolute;top:0;left:0" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="blackGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#2d2d2d;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#0d0d0d;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <rect width="400" height="400" fill="#1a1a1a"/>
+          <rect x="50" y="80" width="300" height="280" fill="url(#blackGradient)" rx="15"/>
+          <circle cx="150" cy="140" r="40" fill="#D4AF37" opacity="0.2"/>
+          <circle cx="250" cy="160" r="35" fill="#D4AF37" opacity="0.15"/>
+          <path d="M 100 250 Q 200 280 300 250" stroke="#D4AF37" stroke-width="3" fill="none" opacity="0.4"/>
+          <text x="200" y="360" font-family="Georgia, serif" font-size="24" fill="#D4AF37" text-anchor="middle" font-weight="bold">BLACK ELEGANCE</text>
+        </svg>
+        <div class="gallery-item-overlay">
+          <h3 class="gallery-item-title">Black Fashion Design</h3>
+        </div>
       </button>
-      <button class="gallery-item" data-title="African Print Collection" data-src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlbaWmJmaoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==">
-        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlbaWmJmaoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q=="/>
-        <span>African Print Collection</span>
+
+      <!-- African Print Collection -->
+      <button class="gallery-item" data-title="African Print Collection" onclick="openLightbox(this)">
+        <svg style="width:100%;height:100%;position:absolute;top:0;left:0" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="africanPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+              <rect width="40" height="40" fill="#1a4d2e"/>
+              <circle cx="10" cy="10" r="5" fill="#D4AF37"/>
+              <circle cx="30" cy="20" r="4" fill="#FF6B35"/>
+              <polygon points="20,5 25,15 15,15" fill="#FFD700"/>
+            </pattern>
+          </defs>
+          <rect width="400" height="400" fill="#1a1a1a"/>
+          <rect x="50" y="80" width="300" height="280" fill="url(#africanPattern)" rx="15"/>
+          <rect x="50" y="80" width="300" height="280" fill="none" stroke="#D4AF37" stroke-width="3" rx="15" opacity="0.5"/>
+          <text x="200" y="360" font-family="Georgia, serif" font-size="24" fill="#D4AF37" text-anchor="middle" font-weight="bold">AFRICAN PRINTS</text>
+        </svg>
+        <div class="gallery-item-overlay">
+          <h3 class="gallery-item-title">African Print Collection</h3>
+        </div>
       </button>
-      <button class="gallery-item" data-title="Brown Elegant Wear" data-src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlbaWmJmaoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==">
-        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlbaWmJmaoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==" alt="Brown Elegant Wear"/>
-        <span>Brown Elegant Wear</span>
+
+      <!-- Brown Elegant Wear -->
+      <button class="gallery-item" data-title="Brown Elegant Wear" onclick="openLightbox(this)">
+        <svg style="width:100%;height:100%;position:absolute;top:0;left:0" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="brownGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#8B6F47;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#A0826D;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#6B5D47;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <rect width="400" height="400" fill="#1a1a1a"/>
+          <rect x="50" y="80" width="300" height="280" fill="url(#brownGradient)" rx="15"/>
+          <rect x="70" y="100" width="260" height="240" fill="none" stroke="#D4AF37" stroke-width="2" rx="10"/>
+          <line x1="100" y1="200" x2="300" y2="200" stroke="#D4AF37" stroke-width="1" opacity="0.3"/>
+          <line x1="200" y1="120" x2="200" y2="280" stroke="#D4AF37" stroke-width="1" opacity="0.3"/>
+          <text x="200" y="360" font-family="Georgia, serif" font-size="24" fill="#D4AF37" text-anchor="middle" font-weight="bold">BROWN ELEGANCE</text>
+        </svg>
+        <div class="gallery-item-overlay">
+          <h3 class="gallery-item-title">Brown Elegant Wear</h3>
+        </div>
       </button>
     </div>
   </div>
+
+  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose">×</button>
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
     <div class="lightbox-content">
-      <img id="lightboxImage" alt="Portfolio preview"/>
+      <svg id="lightboxImage" style="width:100%;height:100%;max-height:70vh" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"></svg>
       <p id="lightboxCaption"></p>
     </div>
   </div>
@@ -450,6 +557,41 @@
 </footer>
 
 <script>
+const galleryImages = {
+  'Gold Luxury Wear': `<defs><linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" /><stop offset="50%" style="stop-color:#D4AF37;stop-opacity:1" /><stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" /></linearGradient></defs><rect width="400" height="400" fill="#1a1a1a"/><rect x="30" y="50" width="340" height="320" fill="url(#goldGradient)" rx="20"/><circle cx="200" cy="140" r="80" fill="#FFE5B4" opacity="0.3"/><polygon points="200,240 260,320 140,320" fill="#2d2d2d" opacity="0.2"/><circle cx="100" cy="100" r="20" fill="#fff" opacity="0.1"/><circle cx="320" cy="280" r="15" fill="#fff" opacity="0.1"/><text x="200" y="380" font-family="Georgia, serif" font-size="28" fill="#D4AF37" text-anchor="middle" font-weight="bold">GOLD LUXURY WEAR</text>`,
+  'Black Fashion Design': `<defs><linearGradient id="blackGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" /><stop offset="50%" style="stop-color:#2d2d2d;stop-opacity:1" /><stop offset="100%" style="stop-color:#0d0d0d;stop-opacity:1" /></linearGradient></defs><rect width="400" height="400" fill="#1a1a1a"/><rect x="30" y="50" width="340" height="320" fill="url(#blackGradient)" rx="20"/><circle cx="120" cy="120" r="50" fill="#D4AF37" opacity="0.25"/><circle cx="280" cy="180" r="45" fill="#D4AF37" opacity="0.2"/><path d="M 80 280 Q 200 320 320 280" stroke="#D4AF37" stroke-width="4" fill="none" opacity="0.5"/><line x1="100" y1="100" x2="300" y2="280" stroke="#D4AF37" stroke-width="1" opacity="0.2"/><text x="200" y="380" font-family="Georgia, serif" font-size="28" fill="#D4AF37" text-anchor="middle" font-weight="bold">BLACK ELEGANCE</text>`,
+  'African Print Collection': `<defs><pattern id="africanPattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><rect width="50" height="50" fill="#1a4d2e"/><circle cx="15" cy="15" r="6" fill="#D4AF37"/><circle cx="35" cy="25" r="5" fill="#FF6B35"/><polygon points="25,5 30,18 18,18" fill="#FFD700"/><rect x="5" y="35" width="8" height="8" fill="#FF6B35"/></pattern></defs><rect width="400" height="400" fill="#1a1a1a"/><rect x="30" y="50" width="340" height="320" fill="url(#africanPattern)" rx="20"/><rect x="30" y="50" width="340" height="320" fill="none" stroke="#D4AF37" stroke-width="4" rx="20" opacity="0.7"/><circle cx="100" cy="100" r="25" fill="#D4AF37" opacity="0.15"/><circle cx="320" cy="300" r="30" fill="#FF6B35" opacity="0.15"/><text x="200" y="380" font-family="Georgia, serif" font-size="28" fill="#D4AF37" text-anchor="middle" font-weight="bold">AFRICAN PRINTS</text>`,
+  'Brown Elegant Wear': `<defs><linearGradient id="brownGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#8B6F47;stop-opacity:1" /><stop offset="50%" style="stop-color:#A0826D;stop-opacity:1" /><stop offset="100%" style="stop-color:#6B5D47;stop-opacity:1" /></linearGradient></defs><rect width="400" height="400" fill="#1a1a1a"/><rect x="30" y="50" width="340" height="320" fill="url(#brownGradient)" rx="20"/><rect x="60" y="80" width="280" height="260" fill="none" stroke="#D4AF37" stroke-width="3" rx="15"/><circle cx="130" cy="150" r="35" fill="#D4AF37" opacity="0.2"/><circle cx="270" cy="240" r="40" fill="#D4AF37" opacity="0.15"/><line x1="100" y1="220" x2="300" y2="220" stroke="#D4AF37" stroke-width="2" opacity="0.4"/><path d="M 150 100 Q 200 80 250 100" stroke="#D4AF37" stroke-width="1.5" fill="none" opacity="0.3"/><text x="200" y="380" font-family="Georgia, serif" font-size="28" fill="#D4AF37" text-anchor="middle" font-weight="bold">BROWN ELEGANCE</text>`
+};
+
+function openLightbox(element) {
+  const title = element.dataset.title;
+  const svg = document.getElementById('lightboxImage');
+  svg.innerHTML = galleryImages[title];
+  document.getElementById('lightboxCaption').textContent = title;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+// Close lightbox on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeLightbox();
+  }
+});
+
+// Close lightbox on background click
+document.getElementById('lightbox').addEventListener('click', (e) => {
+  if (e.target.id === 'lightbox') {
+    closeLightbox();
+  }
+});
+
 // Mobile Navigation Toggle
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.getElementById('nav-menu');
@@ -485,47 +627,6 @@ if (backToTop) {
       top: 0,
       behavior: 'smooth'
     });
-  });
-}
-
-// Gallery Lightbox
-const galleryItems = document.querySelectorAll('.gallery-item');
-const lightbox = document.getElementById('lightbox');
-const lightboxImage = document.getElementById('lightboxImage');
-const lightboxCaption = document.getElementById('lightboxCaption');
-const lightboxClose = document.getElementById('lightboxClose');
-
-if (galleryItems.length > 0) {
-  galleryItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const src = item.dataset.src;
-      const title = item.dataset.title;
-      lightboxImage.src = src;
-      lightboxCaption.textContent = title;
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  if (lightboxClose) {
-    lightboxClose.addEventListener('click', () => {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    });
-  }
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
   });
 }
 
