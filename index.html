@@ -108,9 +108,11 @@ nav.scrolled{padding:.7rem 4rem}
 .portfolio-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
 .portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;margin-top:3rem}
 .portfolio-item{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:pointer;background:var(--dark-3)}
-.portfolio-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease,filter .4s;filter:brightness(.88)}
+.portfolio-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s ease,filter .4s;filter:brightness(.92);z-index:1}
+.portfolio-overlay{z-index:2}
+.portfolio-bg{z-index:0}
 .portfolio-item:hover img{transform:scale(1.06);filter:brightness(1)}
-.portfolio-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,13,.85) 0%,rgba(13,13,13,.1) 60%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;opacity:0;transition:opacity .4s}
+.portfolio-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,13,.85) 0%,rgba(13,13,13,.1) 60%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;opacity:0;transition:opacity .4s;z-index:2}
 .portfolio-item:hover .portfolio-overlay{opacity:1}
 .portfolio-badge{display:inline-block;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dark);background:var(--gold);padding:.3rem .8rem;margin-bottom:.6rem;width:fit-content}
 .portfolio-label{font-family:var(--serif);font-size:1.4rem;color:var(--text)}
@@ -431,7 +433,7 @@ footer{background:var(--dark);border-top:.5px solid rgba(184,150,12,.2);padding:
         <div class="portfolio-bg" style="background:linear-gradient(160deg,#3B1A0A,#6B3218,#8B4513)">
           <div class="portfolio-bg-text" style="font-size:5rem;color:rgba(212,175,55,.18)">01</div>
         </div>
-        <img src="photo1.jpg" alt="Brown Satin Co-ord Set" style="display:block"/>
+        <img src="https://raw.githubusercontent.com/spencerokinyi9834-eng/hawi-sartorial/main/photo1.jpg" alt="Brown Satin Co-ord Set"/>
         <div class="portfolio-overlay">
           <span class="portfolio-badge">Brown Elegance</span>
           <div class="portfolio-label">Chocolate Satin Co-ord</div>
@@ -443,7 +445,7 @@ footer{background:var(--dark);border-top:.5px solid rgba(184,150,12,.2);padding:
         <div class="portfolio-bg" style="background:linear-gradient(160deg,#1B3A1B,#2D5A1B,#8B7332)">
           <div class="portfolio-bg-text" style="font-size:5rem;color:rgba(212,175,55,.18)">02</div>
         </div>
-        <img src="photo2.jpg" alt="Green Gold Safari Print Set" style="display:block"/>
+        <img src="https://raw.githubusercontent.com/spencerokinyi9834-eng/hawi-sartorial/main/photo2.jpg" alt="Green Gold Safari Print Set"/>
         <div class="portfolio-overlay">
           <span class="portfolio-badge">Wild Print</span>
           <div class="portfolio-label">Safari Print Co-ord</div>
@@ -455,7 +457,7 @@ footer{background:var(--dark);border-top:.5px solid rgba(184,150,12,.2);padding:
         <div class="portfolio-bg" style="background:linear-gradient(160deg,#0a0a0a,#1a1a1a,#2a2a2a)">
           <div class="portfolio-bg-text" style="font-size:5rem;color:rgba(255,255,255,.08)">03</div>
         </div>
-        <img src="photo3.jpg" alt="Black Abstract Art Print Set" style="display:block"/>
+        <img src="https://raw.githubusercontent.com/spencerokinyi9834-eng/hawi-sartorial/main/photo3.jpg" alt="Black Abstract Art Print Set"/>
         <div class="portfolio-overlay">
           <span class="portfolio-badge">Black Elegance</span>
           <div class="portfolio-label">Abstract Art Print Set</div>
@@ -467,7 +469,7 @@ footer{background:var(--dark);border-top:.5px solid rgba(184,150,12,.2);padding:
         <div class="portfolio-bg" style="background:linear-gradient(160deg,#4A3500,#8B6914,#C5941A)">
           <div class="portfolio-bg-text" style="font-size:5rem;color:rgba(212,175,55,.18)">04</div>
         </div>
-        <img src="photo4.jpg" alt="Gold Satin Co-ord Set" style="display:block"/>
+        <img src="https://raw.githubusercontent.com/spencerokinyi9834-eng/hawi-sartorial/main/photo4.jpg" alt="Gold Satin Co-ord Set"/>
         <div class="portfolio-overlay">
           <span class="portfolio-badge">Gold Luxury</span>
           <div class="portfolio-label">Gold Satin Co-ord</div>
@@ -609,11 +611,12 @@ footer{background:var(--dark);border-top:.5px solid rgba(184,150,12,.2);padding:
 
 <script>
 // ── Lightbox data ──
+var base='https://raw.githubusercontent.com/spencerokinyi9834-eng/hawi-sartorial/main/';
 var lbItems=[
-  {src:'photo1.jpg',cap:'Chocolate Satin Co-ord — Brown Elegance'},
-  {src:'photo2.jpg',cap:'Safari Print Co-ord — Green & Gold Wild Print'},
-  {src:'photo3.jpg',cap:'Abstract Art Print Set — Black Elegance'},
-  {src:'photo4.jpg',cap:'Gold Satin Co-ord — Gold Luxury'}
+  {src:base+'photo1.jpg',cap:'Chocolate Satin Co-ord — Brown Elegance'},
+  {src:base+'photo2.jpg',cap:'Safari Print Co-ord — Green & Gold Wild Print'},
+  {src:base+'photo3.jpg',cap:'Abstract Art Print Set — Black Elegance'},
+  {src:base+'photo4.jpg',cap:'Gold Satin Co-ord — Gold Luxury'}
 ];
 var lbIdx=0;
 
